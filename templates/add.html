@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Add items</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    </head>
+    <body>
+        <nav id="navbar navbar-default">
+            <ul>
+                <li><a href="{% url 'home' %} ">Home</a></li>
+                <li><a href="{% url 'search' %}">Search</a></li>
+            </ul>
+        </nav>
+
+        
+        <p>The multiple attribute specifies that multiple options can be selected at once:</p>
+
+        <form action="add" method="POST"  enctype="multipart/form-data">
+            {% csrf_token %}
+            
+            <label for="myfile">Select an image:</label>
+            <input type="file" id="myfile" name="myfile">
+            <br><br>
+
+            <label for="tags">Choose tags:</label>
+            <select name="tags" id="tags" multiple>
+                <option value="nature">Nature</option>
+                <option value="b&w">B&w</option>
+                <option value="landscape">Landscape</option>
+                <option value="portrait">Portrait</option>
+                <option value="sketch">Sketch</option>
+                <option value="wildlife">Wildlife</option>
+            </select>
+            <br><br>
+
+            <input type="submit" value="Upload">
+        </form>
+        <br>
+
+        <p>Hold down the Ctrl (windows) or Command (Mac) button to select multiple options.</p>
+           
+        {%if message %}
+            <h3> {{ message }}</h3>
+        {%endif%}
+
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+        
+        <script src="" async defer></script>
+    </body>
+</html>

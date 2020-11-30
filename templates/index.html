@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Image Gallery</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    </head>
+    <body>
+        <nav id="navbar navbar-default">
+            <ul>
+                <li><a href="{% url 'search' %} ">Search</a></li>
+                <li><a href="{% url 'add' %}">Add Image</a></li>
+            </ul>
+        </nav>
+
+        
+        {% for image in images %}
+            <div class="img-container">
+                <a href = "img/{{image.pk}}">
+                    <img class="img-rounded" src= {{image.image_file.url}} alt="" />
+                </a>
+            </div>
+        {% endfor %}
+           
+          
+        {% if images.has_other_pages %}
+            <ul class="pagination">
+                {% if images.has_previous %}
+                    <li><a href="?page={{ images.previous_page_number }}">&laquo;</a></li>
+                {% else %}
+                    <li class="disabled"><span>&laquo;</span></li>
+                {% endif %}
+                
+                {% for i in images.paginator.page_range %}
+                    {% if images.number == i %}
+                        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+                    {% else %}
+                        <li><a href="?page={{ i }}">{{ i }}</a></li>
+                    {% endif %}
+                {% endfor %}
+              
+                {% if images.has_next %}
+                    <li><a href="?page={{ images.next_page_number }}">&raquo;</a></li>
+                {% else %}
+                    <li class="disabled"><span>&raquo;</span></li>
+                {% endif %}
+            
+            </ul>
+          {% endif %}
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+        
+        <script src="" async defer></script>
+    </body>
+</html>
